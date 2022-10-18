@@ -4,7 +4,11 @@
   "description": "An OAuth 2.0 client library for the Authorization Code flow with PKCE",
   "main": "index.js",
   "types": "*.d.ts",
-  "files": ["*.js", "*.d.ts"],
+  "files": [
+    "*.ts",
+    "*.js",
+    "*.d.ts"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/visor/oauth2-pkce.git"
