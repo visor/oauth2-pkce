@@ -19,8 +19,7 @@
     "build:code": "npm run build:code:esm && npm run build:code:browser",
     "build": "npm run clean && npm run build:code",
     "clean": "rm -f *.d.ts *.js",
-    "prepack": "@build",
-    "postinstall": "@build"
+    "postinstall": "npm run clean && npm run build:code"
   },
   "keywords": [
     "oauth",
