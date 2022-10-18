@@ -7,7 +7,8 @@
   "files": [
     "*.ts",
     "*.js",
-    "*.d.ts"
+    "*.d.ts",
+    "tsconfig.json"
   ],
   "repository": {
     "type": "git",
