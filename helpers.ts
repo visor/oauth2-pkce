@@ -89,7 +89,7 @@ export const generatePKCECodeChallengeAndVerifier = async () => {
     const buffer = await crypto
         .subtle
         .digest('SHA-256', (new TextEncoder()).encode(codeVerifier));
-    const hash = new Uint8Array(buffer);
+    const hash = new Uint8Array(buffer['result'] || buffer);
     let binary = '';
     const hashLength = hash.byteLength;
     for (let i: number = 0; i < hashLength; i++) {
