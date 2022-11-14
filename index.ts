@@ -107,15 +107,7 @@ export class OAuth2AuthCodePkceClient {
         this.refreshTokenForAccessTokenPromise = undefined;
     }
 
-    /**
-     * Fetch an authorization code via redirection. In a sense this function
-     * doesn't return because of the redirect behavior (uses `location.replace`).
-     *
-     * @param oneTimeParams A way to specify "one time" query string
-     * parameters during the authorization code fetching process, usually for
-     * values which need to change at run-time.
-     */
-    public async requestAuthorizationCode(oneTimeParams?: ObjStringDict) {
+    public async generateAuthorizationCodeRequestUrl(oneTimeParams?: ObjStringDict): Promise<string> {
         const { clientId, extraAuthorizationParams, redirectUrl, scopes } = this.config;
 
         const { codeChallenge, codeVerifier } = await generatePKCECodeChallengeAndVerifier();
@@ -149,6 +141,19 @@ export class OAuth2AuthCodePkceClient {
             url += `&${objectToQueryString(extraParameters)}`;
         }
 
+        return url;
+    }
+
+    /**
+     * Fetch an authorization code via redirection. In a sense this function
+     * doesn't return because of the redirect behavior (uses `location.replace`).
+     *
+     * @param oneTimeParams A way to specify "one time" query string
+     * parameters during the authorization code fetching process, usually for
+     * values which need to change at run-time.
+     */
+    public async requestAuthorizationCode(oneTimeParams?: ObjStringDict) {
+        const url = await this.generateAuthorizationCodeRequestUrl(oneTimeParams)
         location.replace(url);
     }
 
